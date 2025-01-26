@@ -246,7 +246,7 @@ create table public.expense_receipts (
   created_at timestamptz not null default now()
 );
 
-create table public.reimbursements (
+create table public.expense_reimbursements (
   id serial not null primary key,
 
   expense_id int not null references public.expenses(id) on delete cascade,
