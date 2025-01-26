@@ -63,7 +63,7 @@ returns trigger
 set search_path = ''
 as $$
 begin
-  insert into public.profiles (id, first_name, last_name, avatar_url)
+  insert into public.workers (id, first_name, last_name, avatar_url)
   values (new.id, new.raw_user_meta_data->>'first_name', new.raw_user_meta_data->>'last_name', new.raw_user_meta_data->>'avatar_url');
   return new;
 end;
