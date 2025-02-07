@@ -31,6 +31,7 @@ create table public.workers (
   max_students smallint not null default 20,
 
   address text,
+  phone text,
 
   avatar_url text,
 
@@ -215,21 +216,34 @@ create table public.expenses (
   total int not null,
 
   notes text,
+
+  is_requesting_reimbursement boolean not null default true,
   
   created_at timestamptz not null default now()
 );
 
-create type expense_item_type as enum ('labels', 'postage', 'envelopes', 'program fees', 'other');
+
+create type public.expense_group as enum ('Office Supplies', 'Mail Service', 'Study Material', 'Marketing', 'Other');
+create table public.expense_types (
+  id serial not null primary key,
+
+  name text not null,
+  description text,
+
+  expense_group expense_group not null default 'Other'::expense_group,
+
+  created_at timestamptz not null default now()
+);
+
 create table public.expense_line_items (
   id serial not null primary key,
 
-  expense_id int not null references public.expenses(id) on delete cascade,
+  expense_id int not null references public.expenses(id) on delete cascade,  
+  expense_type int not null references public.expense_types(id) on delete no action,
 
-
-  item_type expense_item_type not null,
   -- in cents
   amount int not null,
-  notes text,
+  description text,
 
   created_at timestamptz not null default now()
 );

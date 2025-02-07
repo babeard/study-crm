@@ -4,6 +4,20 @@ begin
   perform public.create_user('59cd44cf-1d5b-44a4-b2a2-e83882acb3e9', 'brian@test.com', 'testing123');
 end$$;
 
+-- create expense types
+insert into public.expense_types (id, name, description, expense_group) values
+  (1, 'Lessons', 'Study guides, lessons, or courses.', 'Study Material'::expense_group),
+  (2, 'Envelopes', null, 'Office Supplies'::expense_group),
+  (3, 'Labels', null, 'Office Supplies'::expense_group),
+  (4, 'Postage', null, 'Mail Service'::expense_group),
+  (5, 'PO Box', null, 'Mail Service'::expense_group),
+  (6, 'Shipping', null, 'Mail Service'::expense_group),
+  (7, 'Program Fees', null, 'Marketing'::expense_group),
+  (8, 'Ad Campaigns', null, 'Marketing'::expense_group),
+  (9, 'Taxes', null, 'Other'::expense_group),
+  (10, 'I.T. Services', 'Used for online program fees like web hosting.', 'Other'::expense_group),
+  (11, 'Other', null, 'Other'::expense_group);
+
 -- !! Fake
 
 -- Students
